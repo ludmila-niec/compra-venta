@@ -1,0 +1,14 @@
+.containerAll {
+    justify-content: left;
+    margin-left: 2em;
+}
+.row {
+    width: 75%;
+}
+.form-group {
+    width: 50%;
+}
+
+.hidden {
+    display: none;
+}
