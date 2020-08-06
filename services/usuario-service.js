@@ -1,15 +1,35 @@
 const dataStore = require("../db/database");
 
+console.log(dataStore.usuarios);
 module.exports.crearUsuario = function (usuario) {
-    let buscarUsuarioPorNombreYApellido = dataStore.usuarios.filter(
-        (r) => r.nombre == usuario.nombre && r.apellido == usuario.apellido
-    );
+  const { name, lastname, email, password } = usuario;
+  // adding validation for empty inputs
+  if (name && lastname && email && password) {
+    let buscarUsuarioPorNombreYApellido = dataStore.usuarios.filter((r) => {
+      /*  old code
+        //r.nombre == usuario.nombre && r.apellido == usuario.apellido
+        */
+      return r.name === usuario.name;
+    });
+
+    /*  old code
+      //   if (buscarUsuarioPorNombreYApellido.length > 0) {
+      //     throw new Error("Ya existe un usuario con ese nombre y apellido");
+      //   }
+      //   return dataStore.agregarUsuario(usuario);
+      */
+
     if (buscarUsuarioPorNombreYApellido.length > 0) {
-        throw new Error("Ya existe un usuario con ese nombre y apellido");
+      throw new Error("Ya existe un usuario con ese nombre y apellido");
+    } else {
+      const addedUser = dataStore.agregarUsuario(usuario);
+      return addedUser;
     }
-    return dataStore.agregarUsuario(usuario);
+  } else {
+    throw new Error(" some information are missing");
+  }
 };
 
 module.exports.listarUsuarios = function () {
-    return dataStore.usuarios;
+  return dataStore.usuarios;
 };
