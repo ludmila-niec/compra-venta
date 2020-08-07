@@ -1,21 +1,25 @@
 //formulario de registro
-const formRegister = document.getElementById("form");
-
-//No use fetch
-
-// formRegister.onsubmit = () => {
-//     fetch("http://localhost:3002/users", {
-//         headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//             nombre: formRegister.elements["name"].value,
-//             apellido: formRegister.elements["lastName"].value,
-//             email: formRegister.elements["email"].value,
-//             password: formRegister.elements["password"].value,
-//         }),
-//     })
-//         .then((result) => result.json())
-//         .then((r) => console.log(r));
-// };
+const formRegister = document.getElementById("formulario-registro");
+formRegister.onsubmit = async (e) => {
+    e.preventDefault();
+    let usuario = {
+        nombre: formRegister.elements["nombre"].value,
+        apellido: formRegister.elements["apellido"].value,
+        email: formRegister.elements["email"].value,
+        password: formRegister.elements["password"].value,
+    };
+    try {
+        let pedido = await fetch("/usuarios", {
+            method: "POST",
+            body: JSON.stringify(usuario),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        let data = await pedido.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};

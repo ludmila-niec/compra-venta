@@ -1,17 +1,33 @@
 const express = require("express");
 const router = express.Router();
-const productoService = require("../services/productos-service");
+const productoServicio = require("../services/productos-service");
 
-//ahora la ruta es /products.solo para agregar productos
+//Crear productos
 router.post("/", (req, res) => {
     try {
         let nuevoProducto = req.body;
-        let idUser = req.headers.id;
-        console.log(idUser);
-        let result = productoService.crearProducto(nuevoProducto, idUser);
-        res.status(201).json(result);
+        //falta validar los campos del producto(servicio = titulo, descripcion, estado)
+        let idUsuario = req.headers.id;
+        // validacion inputs completos
+        if(!(nuevoProducto && idUsuario)){
+            res.status(400).json({Error: 'Faltan datos para crear el producto'})
+        }else{
+            let resultado = productoServicio.crearProducto(nuevoProducto, idUsuario);
+            if (resultado) {
+                res.status(201).json(resultado);
+            } else {
+                res.status(400).json({ Error: "No se pudo crear el producto" });
+            }
+        }
+
     } catch (err) {
         res.status(400).json({ Error: err.message });
     }
+});
+
+//retornar todos los productos
+router.get("/", (req, res) => {
+    let productos = productoServicio.listarProductos();
+    res.json(productos);
 });
 module.exports = router;
