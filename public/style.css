@@ -1,4 +1,4 @@
-.containerAll {
+/* .containerAll {
     justify-content: left;
     margin-left: 2em;
 }
@@ -7,8 +7,12 @@
 }
 .form-group {
     width: 50%;
+} */
+
+.oculto {
+    display: none;
 }
 
-.hidden {
-    display: none;
+.visible {
+    display: block;
 }
