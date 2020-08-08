@@ -6,12 +6,12 @@ const productoServicio = require("../services/productos-service");
 router.post("/", (req, res) => {
     try {
         let nuevoProducto = req.body;
-        //falta validar los campos del producto(servicio = titulo, descripcion, estado)
+        const { nombreProducto, precio, estado, descripcion } = nuevoProducto
         let idUsuario = req.headers.id;
         // validacion inputs completos
-        if(!(nuevoProducto && idUsuario)){
-            res.status(400).json({Error: 'Faltan datos para crear el producto'})
-        }else{
+        if (!(nuevoProducto && idUsuario)) {
+            res.status(400).json({ Error: 'Faltan datos para crear el producto' })
+        } else {
             let resultado = productoServicio.crearProducto(nuevoProducto, idUsuario);
             if (resultado) {
                 res.status(201).json(resultado);
