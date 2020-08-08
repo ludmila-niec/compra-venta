@@ -2,13 +2,27 @@
     justify-content: left;
     margin-left: 2em;
 }
+
 .row {
     width: 75%;
 }
+
 .form-group {
     width: 50%;
 }
 
 .hidden {
     display: none;
+}
+
+
+/* html crear Producto */
+
+.contenedorProducto {
+    justify-content: left;
+    margin-left: 2em;
+}
+
+.container {
+    max-width: 1230px;
 }
