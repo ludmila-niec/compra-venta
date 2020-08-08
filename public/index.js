@@ -10,6 +10,7 @@ const formularioInicioSesion = document.getElementById(
 const btnRegistro = document.getElementById("btn-form-registro");
 const btnInicioSesion = document.getElementById("btn-form-inicio-sesion");
 
+//mensajes informativos
 let errorFormulario = document.getElementById("registro-error");
 let errorInicioSesion = document.getElementById("inicioSesion-error");
 
@@ -54,12 +55,49 @@ formularioRegistro.onsubmit = async (e) => {
             });
         } else {
             errorFormulario.innerHTML = "";
+            errorInicioSesion.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Usuario creado exitosamente!. Ahora podes iniciar sesión
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                         </button>
+                        </div>`;
+            seccionRegistro.classList.replace("visible", "oculto");
+            seccionIniciarSesion.classList.replace("oculto", "visible");
         }
     } catch (error) {
         console.log(error);
     }
 };
 
-// if (respuesta.exito == true) {
-//     errorRegistro.innerHTML = "OK!";
-// }
+formularioInicioSesion.onsubmit = async (e) => {
+    e.preventDefault();
+    let usuario = {
+        email: formularioInicioSesion.elements["email-login"].value,
+        password: formularioInicioSesion.elements["password-login"].value,
+    };
+    try {
+        let pedido = await fetch("/usuarios/iniciarsesion", {
+            method: "POST",
+            body: JSON.stringify(usuario),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        let contenido = await pedido.json();
+        console.log(contenido);
+        if (contenido.exito == false) {
+            errorInicioSesion.innerHTML = "";
+            let mensajes = contenido.data;
+            mensajes.forEach((error) => {
+                errorInicioSesion.innerHTML += `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        ${error.mensaje}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                         </button>
+                        </div>`;
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};

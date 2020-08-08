@@ -34,6 +34,32 @@ module.exports.validarCamposNuevoUsuario = function (data) {
 
     return errores;
 };
+//metodo para validar campos campos de inicio de sesion
+module.exports.validarCamposInicioSesion = async function (data) {
+    const { email, password } = data;
+    let errores = [];
+
+    //checkear campos vacios
+    if (!email || !password) {
+        errores.push({ mensaje: "Faltan completar campos" });
+    }
+    //buscar si el email esta registrado en la base de datos
+    let usuarioPorEmail = baseDatos.usuarios.find((r) => r.email == email);
+    if (!usuarioPorEmail) {
+        errores.push({ mensaje: "El email ingresado no es valido" });
+        return errores;
+    }
+    //checkear contraseña valida
+    const passwordValido = await bcrypt.compare(
+        password,
+        usuarioPorEmail.password
+    );
+    if (!passwordValido) {
+        errores.push({ mensaje: "La contraseña ingresada es incorrecta" });
+    }
+
+    return errores;
+};
 
 module.exports.hashPassword = async function (usuario) {
     const salt = await bcrypt.genSalt(10);
