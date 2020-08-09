@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publica tu producto en MerLib</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="contenedorTodo">
+
+        <section id="creaTuProducto">
+
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">Publica tu Producto</h1>
+                    <p class="lead">Solo tenes que ingresar los siguientes datos para poder publicar tu producto en nuestra pagina.</p>
+                </div>
+            </div>
+        </section>
+        <section id="registroProducto">
+            <form id="formCrearProducto">
+                <div class="contenedorProducto">
+                    <div class="form-group">
+                        <label for="exampleInputProduct">Nombre de tu producto</label>
+                        <input type="text" class="form-control" name="nombreProducto" id="exampleInputProduct" placeholder="Nombre del Producto">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPrice">Precio del Producto</label>
+                        <input type="text" class="form-control" name="precio" id="exampleInputPrice" placeholder="Precio de tu Producto">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEstate">Estado del Producto</label>
+                        <input type="text" class="form-control" name="estado" id="exampleInputEstate" placeholder="Estado de tu Producto">
+                        <small id="estadoDeTuProducto" class="form-text text-muted">Los estado del producto que podes ingresar son "nuevo o usado".</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Descripción del Producto</label>
+                        <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" placeholder="Descripcion de tu Producto" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success my-4">Crear Producto</button>
+            </form>
+            </div>
+
+        </section>
+    </div>
+    <script src="crearProducto.js"></script>
+</body>
+
+</html>
