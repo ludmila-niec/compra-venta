@@ -1,5 +1,4 @@
 const formCrearProducto = document.getElementById("formCrearProducto");
-console.log(formCrearProducto)
 
 formCrearProducto.onsubmit = async(e) => {
     e.preventDefault();
@@ -16,6 +15,7 @@ formCrearProducto.onsubmit = async(e) => {
             body: JSON.stringify(producto),
             headers: {
                 "Content-Type": "application/json",
+                // id:
             },
         });
         let dataProducto = await pedidoProducto.json();
