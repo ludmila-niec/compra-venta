@@ -1,4 +1,4 @@
-.containerAll {
+/* .containerAll {
     justify-content: left;
     margin-left: 2em;
 }
@@ -9,12 +9,16 @@
 
 .form-group {
     width: 50%;
-}
+} */
 
-.hidden {
+.oculto {
     display: none;
 }
 
+
+.visible {
+    display: block;
+}
 
 /* html crear Producto */
 
@@ -26,3 +30,4 @@
 .container {
     max-width: 1230px;
 }
+
