@@ -2,9 +2,11 @@
     justify-content: left;
     margin-left: 2em;
 }
+
 .row {
     width: 75%;
 }
+
 .form-group {
     width: 50%;
 }
@@ -12,3 +14,40 @@
 .hidden {
     display: none;
 }
+
+
+/* Datos usuarios */
+
+#nombreDato {
+    width: 100%;
+}
+
+#nombreRegistrado {
+    width: 50%;
+}
+
+#apellidoDato {
+    width: 100%;
+}
+
+#apellidoRegistrado {
+    width: 50%;
+}
+
+#emailDato {
+    width: 100%;
+}
+
+#emailRegistrado {
+    width: 50%;
+}
+
+.contenedorDatos {
+    justify-content: left;
+    margin-left: 2em;
+}
+
+
+/* #nombreRegistrado {
+    width: 50%;
+} */
