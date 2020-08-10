@@ -7,6 +7,7 @@ module.exports.crearUsuario = function (usuario) {
         (r) => r.email == usuario.email
     );
     if (buscarUsuarioPorEmail) {
+        //enviar error al front
         throw new Error("Ya existe un usuario con ese email");
     }
     return baseDatos.agregarUsuario(usuario);

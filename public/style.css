@@ -15,7 +15,6 @@
     display: none;
 }
 
-
 .visible {
     display: block;
 }
@@ -31,3 +30,11 @@
     max-width: 1230px;
 }
 
+.contenedor-buscador-producto {
+    background-color: aliceblue;
+    height: 30vh;
+}
+
+.contenedor-resultado-producto{
+    background-color: lightpink;
+}

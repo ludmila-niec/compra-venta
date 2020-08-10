@@ -15,10 +15,11 @@ router.post("/", async (req, res) => {
         const hashedPassword = await usuarioServicio.hashPassword(usuario);
         usuario.password = hashedPassword;
         let usuarioNuevo = usuarioServicio.crearUsuario(usuario);
+        //checkear resultado e informar en front
         res.status(201).json({ exito: true, data: usuarioNuevo });
         return;
     } catch (error) {
-        res.status(500).json({ Error: err.message });
+        res.status(500).json({ Error: error.message });
     }
 });
 
