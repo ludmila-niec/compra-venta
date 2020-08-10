@@ -9,6 +9,7 @@ const formularioInicioSesion = document.getElementById(
 //botones para acceder a los formularios
 const btnRegistro = document.getElementById("btn-form-registro");
 const btnInicioSesion = document.getElementById("btn-form-inicio-sesion");
+const btnIniciarSesion = document.getElementById("btnIniciarSesion")
 
 //mensajes informativos
 let errorFormulario = document.getElementById("registro-error");
@@ -23,7 +24,7 @@ btnRegistro.onclick = () => {
     seccionIniciarSesion.classList.replace("visible", "oculto");
 };
 
-formularioRegistro.onsubmit = async (e) => {
+formularioRegistro.onsubmit = async(e) => {
     e.preventDefault();
     let usuario = {
         nombre: formularioRegistro.elements["nombre"].value,
@@ -69,7 +70,7 @@ formularioRegistro.onsubmit = async (e) => {
     }
 };
 
-formularioInicioSesion.onsubmit = async (e) => {
+formularioInicioSesion.onsubmit = async(e) => {
     e.preventDefault();
     let usuario = {
         email: formularioInicioSesion.elements["email-login"].value,
@@ -96,8 +97,15 @@ formularioInicioSesion.onsubmit = async (e) => {
                          </button>
                         </div>`;
             });
+        } else {
+            redireccionaDatosUsuarios()
         }
     } catch (error) {
         console.log(error);
     }
 };
+
+// funcion que redirecciona a datos usuarios
+function redireccionaDatosUsuarios() {
+    window.open("./datos-usuario.html")
+}
