@@ -1,5 +1,4 @@
 const baseDatos = require("../db/database");
-const database = require("../db/database");
 
 //crear producto
 module.exports.crearProducto = function (producto, idUser) {

@@ -55,30 +55,27 @@ function mostrarResultadoBusqueda(respuesta) {
     productos.forEach((item) => {
         const cardContainer = document.createElement("div");
         cardContainer.classList.add("card", "my-4");
-        const cardHeader = document.createElement("h5");
-        cardHeader.classList.add("card-header", "bg-secondary", "text-white");
-        cardHeader.innerHTML = item.nombreProducto;
-        cardContainer.appendChild(cardHeader);
+        cardContainer.innerHTML = `<h5 class="card-header bg-secondary text-white">
+                                    ${item.nombreProducto}
+                                </h5>`;
         const cardBody = document.createElement("div");
         cardBody.classList.add("card-body");
-        const cardTitle = document.createElement("h5");
-        cardTitle.classList.add("card-title");
-        cardTitle.innerHTML = "$" + item.precio;
-        cardBody.appendChild(cardTitle);
-        const cardText = document.createElement("p");
-        cardText.classList.add("card-text");
-        cardText.innerHTML = item.descripcion;
-        cardBody.appendChild(cardText);
-        const cardEstado = document.createElement("p");
-        cardEstado.classList.add("card-text", "text-muted");
-        cardEstado.innerHTML = item.estado;
-        cardBody.appendChild(cardEstado);
+        cardBody.innerHTML = ` <h5 class="card-title">${item.precio}</h5>
+                                    <p class="card-text">
+                                        ${item.descripcion}
+                                    </p>
+                                    <p class="card-text text-muted">
+                                        ${item.estado}
+                                    </p>`;
         const btnComprar = document.createElement("button");
         btnComprar.classList.add("btn", "btn-secondary");
         btnComprar.innerHTML = "Comprar";
         cardBody.appendChild(btnComprar);
         cardContainer.appendChild(cardBody);
-
         contenedorResultadoProductos.appendChild(cardContainer);
+
+        btnComprar.onclick = () => {
+            console.log("click boton comprar");
+        };
     });
 }
