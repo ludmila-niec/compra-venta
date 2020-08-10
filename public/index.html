@@ -1,49 +1,76 @@
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Bienvenido a MerLib</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Bienvenido a MerLib</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-    <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-    <section id="home">
-        <div class="jumbotron">
-            <h1 class="display-4">Hello, Stranger!</h1>
-            <p class="lead">
-                Bienvenido al portal de compra y venta de articulos
-            </p>
-            <hr class="my-4" />
-            <button type="button" id="btn-form-registro" class="btn btn-primary btn-lg mr-2">
+    <body>
+        <section id="home">
+            <div class="jumbotron">
+                <h1 class="display-4">Hello, Stranger!</h1>
+                <p class="lead">
+                    Bienvenido al portal de compra y venta de articulos
+                </p>
+                <hr class="my-4" />
+                <button
+                    type="button"
+                    id="btn-form-registro"
+                    class="btn btn-primary btn-lg mr-2"
+                >
                     Registrarse
                 </button>
-            <button type="button" id="btn-form-inicio-sesion" class="btn btn-outline-primary btn-lg">
+                <button
+                    type="button"
+                    id="btn-form-inicio-sesion"
+                    class="btn btn-outline-primary btn-lg"
+                >
                     Iniciar Sesión
                 </button>
-        </div>
-    </section>
-    <section id="registo" class="visible">
-        <div class="row my-5">
-            <div class="col-md-5 m-auto">
-                <div class="card card-body border-primary">
-                    <h1 class="mb-5">Registrar usuario</h1>
-                    <div id="registro-error"></div>
-                    <div>
-                        <form id="formulario-registro" method="POST">
-                            <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Tu nombre" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="apellido">Apellido</label>
-                                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Tu apellido" required />
-                            </div>
+            </div>
+        </section>
+        <section id="registo" class="visible">
+            <div class="row my-5 mx-0 d-flex justify-content-center">
+                <div class="col-md-5">
+                    <div class="card card-body border-primary">
+                        <h1 class="mb-5">Registrar usuario</h1>
+                        <div id="registro-error"></div>
+                        <div>
+                            <form id="formulario-registro" method="POST">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="nombre"
+                                        id="nombre"
+                                        placeholder="Tu nombre"
+                                        required
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellido">Apellido</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="apellido"
+                                        id="apellido"
+                                        placeholder="Tu apellido"
+                                        required
+                                    />
+                                </div>
 
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email</label
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"
+                                        >Email</label
                                     >
                                     <input
                                         type="email"
@@ -86,8 +113,8 @@
             </div>
         </section>
         <section id="inicio-sesion" class="oculto">
-            <div class="row my-5">
-                <div class="col-md-5 m-auto">
+            <div class="row my-5 mx-0 d-flex justify-content-center">
+                <div class="col-md-5">
                     <div class="card card-body border-primary">
                         <h1 class="mb-5">Iniciar Sesión</h1>
                         <div id="inicioSesion-error"></div>
@@ -95,10 +122,18 @@
                             <form method="POST" id="formulario-inicio-sesion">
                                 <div class="form-group">
                                     <label for="InputEmail">Email</label>
-                                <input type="email" name="email-login" class="form-control" id="InputEmail" aria-describedby="emailHelp" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="InputPassword">Contraseña</label
+                                    <input
+                                        type="email"
+                                        name="email-login"
+                                        class="form-control"
+                                        id="InputEmail"
+                                        aria-describedby="emailHelp"
+                                        required
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="InputPassword"
+                                        >Contraseña</label
                                     >
                                     <input
                                         type="password"
@@ -111,7 +146,7 @@
                                 <button
                                     type="submit"
                                     class="btn btn-primary mt-5 p-2 btn-block"
-                                    id = "btnIniciarSesion"
+                                    id="btnIniciarSesion"
                                 >
                                     Iniciar Sesión
                                 </button>

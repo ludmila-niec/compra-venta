@@ -1,14 +1,18 @@
 const formCrearProducto = document.getElementById("formCrearProducto");
 
-formCrearProducto.onsubmit = async(e) => {
+formCrearProducto.onsubmit = async (e) => {
     e.preventDefault();
     let producto = {
-        nombreProducto: formCrearProducto.elements["nombreProducto"].value,
+        nombreProducto: formCrearProducto.elements[
+            "nombreProducto"
+        ].value.toLowerCase(),
         precio: formCrearProducto.elements["precio"].value,
         estado: formCrearProducto.elements["estado"].value,
-        descripcion: formCrearProducto.elements["descripcion"].value,
+        descripcion: formCrearProducto.elements[
+            "descripcion"
+        ].value.toLowerCase(),
     };
-    console.log(producto)
+    console.log(producto);
     try {
         let pedidoProducto = await fetch("/productos", {
             method: "POST",

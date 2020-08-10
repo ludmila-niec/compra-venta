@@ -22,7 +22,7 @@
             </div>
         </section>
         <section id="registroProducto">
-            <div class="row my-5">
+            <div class="row my-5 mx-0">
                 <div class="col-md-5 m-auto">
                     <div class="card card-body border-primary">
                         <h1 class="mb-5">Crear Producto</h1>
@@ -30,20 +30,22 @@
                             <div class="contenedorProducto">
                                 <div class="form-group">
                                     <label for="exampleInputProduct">Nombre de tu producto</label>
-                                    <input type="text" class="form-control" name="nombreProducto" id="exampleInputProduct" placeholder="Nombre del Producto">
+                                    <input type="text" class="form-control" name="nombreProducto" id="exampleInputProduct" placeholder="Nombre del Producto" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPrice">Precio del Producto</label>
-                                    <input type="text" class="form-control" name="precio" id="exampleInputPrice" placeholder="Precio de tu Producto">
+                                    <input type="number" class="form-control" name="precio" id="exampleInputPrice" placeholder="Precio de tu Producto" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEstate">Estado del Producto</label>
-                                    <input type="text" class="form-control" name="estado" id="exampleInputEstate" placeholder="Estado de tu Producto">
-                                    <small id="estadoDeTuProducto" class="form-text text-muted">Los estado del producto que podes ingresar son "nuevo o usado".</small>
+                                <div class="form-group col-md-5 pl-0">
+                                    <label for="exampleInputEstate">Estado del Producto:</label>
+                                    <select name="estado" id="estadoProducto" class="form-control" required>
+                                        <option value="nuevo" selected>Nuevo</option>
+                                        <option value="usado">Usado</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Descripción del Producto</label>
-                                    <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" placeholder="Descripcion de tu Producto" rows="3"></textarea>
+                                    <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" placeholder="Descripcion de tu Producto" rows="3" required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-5 p-2 btn-block">Crear Producto</button>
                         </form>
