@@ -10,9 +10,10 @@ module.exports.crearProducto = function (producto, idUser) {
     }
 };
 
-module.exports.buscarProductoPorNombre = function (busqueda) {
-    let lista = baseDatos.productos.filter(
-        (item) => item.nombreProducto == busqueda
+module.exports.buscarProductoPorPalabraClave = function (busqueda) {
+    //buscar palabra clave en la descripcion del producto
+    let lista = baseDatos.productos.filter((item) =>
+        item.descripcion.includes(busqueda)
     );
     if (lista.length > 0) {
         return lista;
@@ -20,7 +21,26 @@ module.exports.buscarProductoPorNombre = function (busqueda) {
         return null;
     }
 };
+module.exports.filtrarPorEstado = function (lista, estado) {
+    if (estado === "nuevo") {
+        let listaNuevos = lista.filter((item) => item.estado == "nuevo");
+        if (listaNuevos.length > 0) {
+            return listaNuevos;
+        } else {
+            return null;
+        }
+    }
 
+    if (estado === "usado") {
+        let listaUsados = lista.filter((item) => item.estado == "usado");
+        if (listaUsados.length > 0) {
+            return listaUsados;
+        } else {
+            return null;
+        }
+    }
+};
+/*
 //retorna todos los productos nuevos
 module.exports.buscarProductoNuevo = function () {
     let listaNuevos = baseDatos.productos.filter(
@@ -43,7 +63,7 @@ module.exports.buscarProductoUsado = function () {
         return null;
     }
 };
-
+*/
 module.exports.listarProductos = function () {
     return baseDatos.productos;
 };

@@ -3,13 +3,7 @@ const bcrypt = require("bcryptjs");
 
 //en vez de validar si existe por nombre y apellido, voy a buscar solo por email.
 module.exports.crearUsuario = function (usuario) {
-    let buscarUsuarioPorEmail = baseDatos.usuarios.find(
-        (r) => r.email == usuario.email
-    );
-    if (buscarUsuarioPorEmail) {
-        //enviar error al front
-        throw new Error("Ya existe un usuario con ese email");
-    }
+   //La validacion de un email disponible la hice en el paso anterior. validarCamposNuevoUsuario
     return baseDatos.agregarUsuario(usuario);
 };
 
@@ -17,16 +11,33 @@ module.exports.crearUsuario = function (usuario) {
 module.exports.validarCamposNuevoUsuario = function (data) {
     const { nombre, apellido, email, password } = data;
     let errores = [];
+    //checkear campos vacios
     if (!nombre || !apellido || !email || !password) {
-        errores.push({ mensaje: "Faltan completar campos" });
+        errores.push({
+            mensaje: "Faltan completar campos",
+        });
     }
 
     //validar un email real
     if (!email.includes(".com")) {
-        errores.push({ mensaje: "No ingresastre un email válido" });
+        errores.push({
+            mensaje: "No ingresastre un email válido",
+        });
     }
 
-    //validar password
+    //checkear si el email ingresado ya se encuentra registrado
+    let buscarUsuarioPorEmail = baseDatos.usuarios.find(
+        (r) => r.email == email
+    );
+    if (buscarUsuarioPorEmail) {
+        errores.push({
+            mensaje: "Ya existe un usuario con ese email",
+        });
+        //si el email esta registrado informar el error. No va a verificar el password valido
+        return errores;
+    }
+
+    //validar password minimo 6 caracteres
     if (password.length < 6) {
         errores.push({
             mensaje: "La contraseña debe tener al menos 6 caracteres",

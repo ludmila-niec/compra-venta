@@ -29,65 +29,49 @@ router.post("/", (req, res) => {
     }
 });
 
-//retornar todos los productos
-// router.get("/", (req, res) => {
-//     let productos = productoServicio.listarProductos();
-//     res.json(productos);
-// });
-
 //retorna productos de una busqueda particular
+//retorna productos por estado (nuevo/usado)
 router.get("/", (req, res) => {
-    let palabraClave = req.query.buscar
-    if (palabraClave == undefined) {
-        //retornar todos los productos
-        let productos = productoServicio.listarProductos();
-        res.status(200).json({ exito: true, data: productos });
-        return;
-    }
-
-    let listaDeProductos = productoServicio.buscarProductoPorNombre(
-        palabraClave
-    );
-    if (listaDeProductos == null) {
-        res.status(404).json({
-            exito: false,
-            data: "No se encontraron productos",
-        });
-        return;
-    }
-    res.status(200).json({ exito: true, data: listaDeProductos });
-});
-
-//retorna lista de productos segun su estado
-//ahora hace el filtro sobre todos los productos
-router.get("/:estado", (req, res) => {
-    let estadoProducto = req.params.estado;
-    if (estadoProducto === "nuevo") {
-        let listaDeProductos = productoServicio.buscarProductoNuevo();
-        if (listaDeProductos == null) {
-            res.status(404).json({
-                exito: false,
-                data: "No se encontraron productos nuevos",
-            });
-            return;
-        } else {
-            res.status(200).json({ exito: true, data: listaDeProductos });
-            return;
+    try {
+        const palabraClave = req.query.buscar;
+        const estado = req.query.estado;
+        if (!palabraClave) {
+            return res
+                .status(404)
+                .json({ exito: false, data: "No se encontraron productos" });
         }
-    }
-
-    if (estadoProducto === "usado") {
-        let listaDeProductos = productoServicio.buscarProductoUsado();
+        //buscar productos con la palabra clave
+        let listaDeProductos = productoServicio.buscarProductoPorPalabraClave(
+            palabraClave
+        );
         if (listaDeProductos == null) {
-            res.status(404).json({
+            return res.status(404).json({
                 exito: false,
-                data: "No se encontraron productos usados",
+                data: "No se encontraron productos",
             });
-            return;
-        } else {
-            res.status(200).json({ exito: true, data: listaDeProductos });
-            return;
         }
+        //si no se solicita filtrar por estado, retornar lista de productos encontrados
+        if (!estado) {
+            return res
+                .status(200)
+                .json({ exito: true, data: listaDeProductos });
+        }
+
+        //filtrar productos encontrados por estado
+        let listaFiltradaEstado = productoServicio.filtrarPorEstado(
+            listaDeProductos,
+            estado
+        );
+        if (listaFiltradaEstado == null) {
+            return res.status(404).json({
+                exito: false,
+                data: "No se encontraron productos",
+            });
+        }
+
+        return res.status(200).json({ exito: true, data: listaFiltradaEstado });
+    } catch (err) {
+        console.log(err);
     }
 });
 

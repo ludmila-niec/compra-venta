@@ -35,9 +35,9 @@ router.post("/iniciarsesion", async (req, res) => {
             res.status(400).json({ exito: false, data: validacion });
             return;
         }
-        res.status(200).json({ mensaje: "Login ok" });
+        // res.status(200).json({ mensaje: "Login ok" });
         //fijarse como redireccionar al 'inicio'
-        //res.redirect('/inicio') - Error en front
+        res.redirect("/inicio");
         //En postman funciona
     } catch (err) {
         res.status(500).json({ Error: err.message });

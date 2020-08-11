@@ -23,59 +23,94 @@ const queryUsado = "estado=usado";
 const filtroTodos = document.getElementById("query-todos");
 
 //boton solo busca la palabra clave ingresada por el usuario
-//faltar mostrar leyenda cuando no haya productos para la busqueda
-btnBuscarProducto.onclick = async () => {
-    let palabraClave = busquedaProductoInput.value;
-    let pedido = await fetch(`/productos?buscar=${palabraClave}`);
-    let respuesta = await pedido.json();
-    console.log(respuesta);
-    busquedaActiva.innerHTML = `Resultados para: ${palabraClave}`;
-    mostrarResultadoBusqueda(respuesta);
+btnBuscarProducto.addEventListener("click", buscarProductoPorPalabra);
+
+async function buscarProductoPorPalabra() {
+    try {
+        let palabraClave = busquedaProductoInput.value.toLowerCase();
+        let pedido = await fetch(`/productos?buscar=${palabraClave}`);
+        let respuesta = await pedido.json();
+        console.log(respuesta);
+        busquedaActiva.innerHTML = `Resultados para: ${palabraClave}`;
+        mostrarResultadoBusqueda(respuesta);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//filtrar busqueda activa por estado 'Nuevo'
+filtroNuevo.onclick = async () => {
+    try {
+        console.log("click en nuevo");
+        let palabraClave = busquedaProductoInput.value.toLowerCase();
+        let pedido = await fetch(
+            `/productos?buscar=${palabraClave}&${queryNuevo}`
+        );
+        let respuesta = await pedido.json();
+        console.log(respuesta);
+        busquedaActiva.innerHTML = `Productos disponibles`;
+        mostrarResultadoBusqueda(respuesta);
+    } catch (error) {
+        console.log(error);
+    }
 };
 
-//agregar eventos para las opciones de nuevo y usado
-///productos/nuevo?buscar=palabraClave
-///productos/usado?buscar=palabraClave
-
-//retorna todos los productos disponibles
-filtroTodos.onclick = async () => {
-    console.log("click en todos");
-    let pedido = await fetch(`/productos`);
-    let respuesta = await pedido.json();
-    console.log(respuesta);
-    busquedaActiva.innerHTML = `Productos disponibles`;
-    mostrarResultadoBusqueda(respuesta);
+//filtrar busqueda activa por estado 'Usado'
+filtroUsado.onclick = async () => {
+    try {
+        console.log("click en nuevo");
+        let palabraClave = busquedaProductoInput.value.toLowerCase();
+        let pedido = await fetch(
+            `/productos?buscar=${palabraClave}&${queryUsado}`
+        );
+        let respuesta = await pedido.json();
+        console.log(respuesta);
+        busquedaActiva.innerHTML = `Productos disponibles`;
+        mostrarResultadoBusqueda(respuesta);
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 //funcion para armar html del producto resultado de la busqueda
 function mostrarResultadoBusqueda(respuesta) {
-    seccionResultadpBusqueda.classList.replace("oculto", "visible");
-    let productos = respuesta.data;
-    contenedorResultadoProductos.innerHTML = " ";
-    productos.forEach((item) => {
-        const cardContainer = document.createElement("div");
-        cardContainer.classList.add("card", "my-4");
-        cardContainer.innerHTML = `<h5 class="card-header bg-secondary text-white">
-                                    ${item.nombreProducto}
-                                </h5>`;
-        const cardBody = document.createElement("div");
-        cardBody.classList.add("card-body");
-        cardBody.innerHTML = ` <h5 class="card-title">${item.precio}</h5>
-                                    <p class="card-text">
-                                        ${item.descripcion}
-                                    </p>
-                                    <p class="card-text text-muted">
-                                        ${item.estado}
-                                    </p>`;
-        const btnComprar = document.createElement("button");
-        btnComprar.classList.add("btn", "btn-secondary");
-        btnComprar.innerHTML = "Comprar";
-        cardBody.appendChild(btnComprar);
-        cardContainer.appendChild(cardBody);
-        contenedorResultadoProductos.appendChild(cardContainer);
+    try {
+        seccionResultadpBusqueda.classList.replace("oculto", "visible");
+        contenedorResultadoProductos.innerHTML = " ";
+        if (respuesta.exito == false) {
+            contenedorResultadoProductos.innerHTML = `<h3 class="text-muted">${respuesta.data}</h3>`;
+            return;
+        }
+        let productos = respuesta.data;
+        productos.forEach((item) => {
+            const cardContainer = document.createElement("div");
+            cardContainer.classList.add("card", "my-4");
+            cardContainer.innerHTML = `<h4 class="card-header bg-secondary text-white">
+                                            ${item.nombreProducto.toUpperCase()}
+                                        </h4>`;
+            const cardBody = document.createElement("div");
+            cardBody.classList.add("card-body");
+            cardBody.innerHTML = ` <h3 class="card-title">$${item.precio}</h3>                      
+                                            <p class="card-text text-muted">
+                                                Estado: ${item.estado}
+                                            </p>
+                                            <p class="mb-0 mt-1"><strong>Descripción:</strong></p>
+                                            <p class="lead">
+                                                ${item.descripcion}
+                                            </p>
+                                            `;
+            const btnComprar = document.createElement("button");
+            btnComprar.classList.add("btn", "btn-secondary");
+            btnComprar.innerHTML = "Comprar";
+            cardBody.appendChild(btnComprar);
+            cardContainer.appendChild(cardBody);
+            contenedorResultadoProductos.appendChild(cardContainer);
 
-        btnComprar.onclick = () => {
-            console.log("click boton comprar");
-        };
-    });
+            btnComprar.onclick = () => {
+                console.log("click boton comprar");
+            };
+        });
+    } catch (error) {
+        console.log(error);
+    }
 }
