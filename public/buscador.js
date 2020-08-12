@@ -48,7 +48,7 @@ filtroNuevo.onclick = async () => {
         );
         let respuesta = await pedido.json();
         console.log(respuesta);
-        busquedaActiva.innerHTML = `Productos disponibles`;
+        busquedaActiva.innerHTML = `Productos: Nuevos`;
         mostrarResultadoBusqueda(respuesta);
     } catch (error) {
         console.log(error);
@@ -65,12 +65,26 @@ filtroUsado.onclick = async () => {
         );
         let respuesta = await pedido.json();
         console.log(respuesta);
-        busquedaActiva.innerHTML = `Productos disponibles`;
+        busquedaActiva.innerHTML = `Productos: Usados`;
         mostrarResultadoBusqueda(respuesta);
     } catch (error) {
         console.log(error);
     }
 };
+
+//volver mostrar los productos sin filtro de estado
+filtroTodos.onclick = () =>{
+    try {
+        let palabraClave = busquedaProductoInput.value.toLowerCase();
+        let pedido = await fetch(`/productos?buscar=${palabraClave}`);
+        let respuesta = await pedido.json();
+        console.log(respuesta);
+        busquedaActiva.innerHTML = `Resultados para: ${palabraClave}`;
+        mostrarResultadoBusqueda(respuesta);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 //funcion para armar html del producto resultado de la busqueda
 function mostrarResultadoBusqueda(respuesta) {
