@@ -100,14 +100,9 @@ formularioInicioSesion.onsubmit = async (e) => {
                         </div>`;
             });
         } else {
-            redireccionaDatosUsuarios();
+            window.location.href = "/inicio";
         }
     } catch (error) {
         console.log(error);
     }
 };
-
-// funcion que redirecciona a datos usuarios
-function redireccionaDatosUsuarios() {
-    window.open("./datos-usuario.html");
-}

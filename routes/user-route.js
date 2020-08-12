@@ -1,6 +1,10 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
 const usuarioServicio = require("../services/usuario-service");
 const router = express.Router();
+const SECRET_JWT = "skfnsiLSAOAsd5aslsk87sn";
+const { usuarioAutorizado } = require("../middleware/auth");
+//despues guardamos los 'secretos' en variables de entorno
 
 //registra usuario nuevo
 router.post("/", async (req, res) => {
@@ -15,10 +19,11 @@ router.post("/", async (req, res) => {
         const hashedPassword = await usuarioServicio.hashPassword(usuario);
         usuario.password = hashedPassword;
         let usuarioNuevo = usuarioServicio.crearUsuario(usuario);
+        //checkear resultado e informar en front
         res.status(201).json({ exito: true, data: usuarioNuevo });
         return;
     } catch (error) {
-        res.status(500).json({ Error: err.message });
+        res.status(500).json({ Error: error.message });
     }
 });
 
@@ -34,19 +39,38 @@ router.post("/iniciarsesion", async (req, res) => {
             res.status(400).json({ exito: false, data: validacion });
             return;
         }
-        res.status(200).json({ mensaje: "Login ok" });
-        //fijarse como redireccionar al 'inicio'
-        //res.redirect('/inicio') - Error en front
-        //En postman funciona
+        //buscar id del usuario
+        let usuarioDataStore = usuarioServicio.buscarUsuarioPorEmail(
+            req.body.email
+        );
+        //generar Token
+        let token = jwt.sign(
+            {
+                id: usuarioDataStore.id,
+                nombre: usuarioDataStore.nombre,
+            },
+            SECRET_JWT
+        );
+
+        //agrego el token a la cookie
+        res.cookie("token", token, { httpOnly: true });
+        res.status(200).send({ exito: true, data: "Login Ok" });
     } catch (err) {
         res.status(500).json({ Error: err.message });
     }
 });
 
 //Retorna la lista de usuarios
-router.get("/", (req, res) => {
-    let usuarios = usuarioServicio.listarUsuarios();
-    res.json(usuarios);
+router.get("/", usuarioAutorizado, (req, res) => {
+    console.log(req.usuario.id);
+    let usuarioId = req.usuario.id;
+    // let usuarios = usuarioServicio.listarUsuarios();
+    // res.json(usuarios);
+
+    //ahora devuelve informacion del usuario por id.
+    //fetch de los datos del usuario para mostrar en el front
+    let usuario = usuarioServicio.buscarUsuarioPorId(usuarioId);
+    res.status(200).json({ exito: true, data: usuario });
 });
 
 module.exports = router;

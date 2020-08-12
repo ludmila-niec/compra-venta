@@ -3,12 +3,7 @@ const bcrypt = require("bcryptjs");
 
 //en vez de validar si existe por nombre y apellido, voy a buscar solo por email.
 module.exports.crearUsuario = function (usuario) {
-    let buscarUsuarioPorEmail = baseDatos.usuarios.find(
-        (r) => r.email == usuario.email
-    );
-    if (buscarUsuarioPorEmail) {
-        throw new Error("Ya existe un usuario con ese email");
-    }
+    //La validacion de un email disponible la hice en el paso anterior. validarCamposNuevoUsuario
     return baseDatos.agregarUsuario(usuario);
 };
 
@@ -16,6 +11,7 @@ module.exports.crearUsuario = function (usuario) {
 module.exports.validarCamposNuevoUsuario = function (data) {
     const { nombre, apellido, email, password } = data;
     let errores = [];
+    //checkear campos vacios
     if (!nombre || !apellido || !email || !password) {
         errores.push({ mensaje: "Faltan completar campos" });
     }
@@ -25,7 +21,18 @@ module.exports.validarCamposNuevoUsuario = function (data) {
         errores.push({ mensaje: "No ingresastre un email válido" });
     }
 
-    //validar password
+    //checkear si el email ingresado ya se encuentra registrado
+    let buscarUsuarioPorEmail = baseDatos.usuarios.find(
+        (r) => r.email == email
+    );
+    if (buscarUsuarioPorEmail) {
+        errores.push({
+            mensaje: "Ya existe un usuario con ese email",
+        });
+        //si el email esta registrado informar el error. No va a verificar el password valido
+        return errores;
+    }
+    //validar password minimo 6 caracteres
     if (password.length < 6) {
         errores.push({
             mensaje: "La contraseña debe tener al menos 6 caracteres",
@@ -61,6 +68,14 @@ module.exports.validarCamposInicioSesion = async function (data) {
     return errores;
 };
 
+//buscar usuario por email
+module.exports.buscarUsuarioPorEmail = function (email) {
+    let buscarUsuarioPorEmail = baseDatos.usuarios.find(
+        (r) => r.email == email
+    );
+    return buscarUsuarioPorEmail;
+};
+
 module.exports.hashPassword = async function (usuario) {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(usuario.password, salt);
@@ -69,4 +84,9 @@ module.exports.hashPassword = async function (usuario) {
 
 module.exports.listarUsuarios = function () {
     return baseDatos.usuarios;
+};
+
+module.exports.buscarUsuarioPorId = function (id) {
+    let usuario = baseDatos.usuarios.find((r) => r.id == id);
+    return usuario;
 };

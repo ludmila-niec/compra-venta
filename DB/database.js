@@ -7,6 +7,8 @@ let productos = [];
 function agregarUsuario(usuario) {
     //agrego array de productos creados por el usuario
     usuario.misProductos = []
+    //agrego lista de compras
+    usuario.misCompras = []
     usuario.id = idUsuario;
     usuarios.push(usuario);
     idUsuario++;
