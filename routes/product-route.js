@@ -36,7 +36,8 @@ router.post("/:idProducto", usuarioAutorizado, (req, res) => {
     const idProducto = req.params.idProducto;
     let confirmaDeCompra = realizarUnaCompra(idProducto, idUsuario);
     if (confirmaDeCompra) {
-      res.json(usuarios);
+      //res.json(usuarios);
+      res.status(200).json({exito:true, data:'Producto agregado a Mis Compras!'})
     }
   } catch (error) {
     res.send(error.message);

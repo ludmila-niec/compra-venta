@@ -73,7 +73,7 @@ filtroUsado.onclick = async () => {
 };
 
 //volver mostrar los productos sin filtro de estado
-filtroTodos.onclick = () =>{
+filtroTodos.onclick = async () => {
     try {
         let palabraClave = busquedaProductoInput.value.toLowerCase();
         let pedido = await fetch(`/productos?buscar=${palabraClave}`);
@@ -84,7 +84,7 @@ filtroTodos.onclick = () =>{
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 //funcion para armar html del producto resultado de la busqueda
 function mostrarResultadoBusqueda(respuesta) {
@@ -120,8 +120,33 @@ function mostrarResultadoBusqueda(respuesta) {
             cardContainer.appendChild(cardBody);
             contenedorResultadoProductos.appendChild(cardContainer);
 
-            btnComprar.onclick = () => {
-                console.log("click boton comprar");
+            btnComprar.onclick = async () => {
+                let idProducto = item.id;
+                console.log(item.id);
+                console.log('click comprar');
+                console.log(item);
+                try {
+                    let pedido = await fetch(`/productos/${idProducto}`, {
+                        method: "POST",
+                        body: JSON.stringify(item),
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
+                    let respuesta = await pedido.json();
+                    if (respuesta.exito) {
+                        let alerta = document.createElement("div");
+                        alerta.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>${respuesta.data}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>`;
+                        btnComprar.insertAdjacentElement("beforebegin", alerta);
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
             };
         });
     } catch (error) {

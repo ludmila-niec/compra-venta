@@ -35,18 +35,6 @@ module.exports.validarCamposNuevoUsuario = function (data) {
         //si el email esta registrado informar el error. No va a verificar el password valido
         return errores;
     }
-
-    //checkear si el email ingresado ya se encuentra registrado
-    let buscarUsuarioPorEmail = baseDatos.usuarios.find(
-        (r) => r.email == email
-    );
-    if (buscarUsuarioPorEmail) {
-        errores.push({
-            mensaje: "Ya existe un usuario con ese email",
-        });
-        //si el email esta registrado informar el error. No va a verificar el password valido
-        return errores;
-    }
     //validar password minimo 6 caracteres
     if (password.length < 6) {
         errores.push({
