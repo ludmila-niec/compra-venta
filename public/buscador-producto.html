@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Bienvenido a MerLib</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="row mx-0 my-4 py-3 contenedor-buscador-producto">
+            <div
+                class="col-10 m-auto d-flex flex-column align-items-center justify-content-between"
+            >
+                <h2 class="mb-4">Buscar Productos</h2>
+                <input
+                    class="form-control form-control-lg col-8"
+                    type="text"
+                    id="input-busqueda-producto"
+                    placeholder="Ingresa tu búsqueda aquí..."
+                />
+                <button
+                    type="button"
+                    id="btn-buscar-producto"
+                    class="btn btn-primary px-4 mt-4"
+                >
+                    Buscar
+                </button>
+            </div>
+        </div>
+        <section id="container-busqueda-resultado" class="oculto">
+            <div class="row m-5 py-3 d-flex justify-content-around">
+                <div class="col-10">
+                    <div>
+                        <h4 id="busqueda-activa-placeholder">
+                            <strong>Resultados para:</strong>
+                        </h4>
+                    </div>
+                    <hr id="barra-separadora-resultados" />
+                    <div id="resultado-busqueda-dinamica"></div>
+                </div>
+                <div class="dropdown">
+                    <button
+                        class="btn btn-secondary px-3 dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        Mostrar Productos:
+                    </button>
+                    <div
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                    >
+                        <a class="dropdown-item" id="query-nuevo" href="#"
+                            >Nuevo</a
+                        >
+                        <a class="dropdown-item" id="query-usado" href="#"
+                            >Usado</a
+                        >
+                        <a class="dropdown-item" id="query-todos" href="#"
+                            >Todos</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"
+        ></script>
+        <script src="buscador.js"></script>
+    </body>
+</html>
