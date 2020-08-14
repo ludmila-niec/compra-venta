@@ -1,7 +1,6 @@
 const baseDatos = require("../db/database");
 const bcrypt = require("bcryptjs");
 
-//en vez de validar si existe por nombre y apellido, voy a buscar solo por email.
 module.exports.crearUsuario = function (usuario) {
     //La validacion de un email disponible la hice en el paso anterior. validarCamposNuevoUsuario
     return baseDatos.agregarUsuario(usuario);
@@ -13,12 +12,16 @@ module.exports.validarCamposNuevoUsuario = function (data) {
     let errores = [];
     //checkear campos vacios
     if (!nombre || !apellido || !email || !password) {
-        errores.push({ mensaje: "Faltan completar campos" });
+        errores.push({
+            mensaje: "Faltan completar campos",
+        });
     }
 
     //validar un email real
     if (!email.includes(".com")) {
-        errores.push({ mensaje: "No ingresastre un email válido" });
+        errores.push({
+            mensaje: "No ingresastre un email válido",
+        });
     }
 
     //checkear si el email ingresado ya se encuentra registrado

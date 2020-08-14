@@ -2,15 +2,14 @@
     display: none;
 }
 
-#faltaProducto {
-    justify-content: center;
-    margin-top: 2em;
-}
-
 .visible {
     display: block;
 }
 
+#faltaProducto {
+    justify-content: center;
+    margin-top: 2em;
+}
 
 /* contenedor para sector de barra busqueda*/
 
@@ -18,3 +17,5 @@
     background-color: aliceblue;
     height: 30vh;
 }
+
+

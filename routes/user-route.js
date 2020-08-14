@@ -64,9 +64,6 @@ router.post("/iniciarsesion", async (req, res) => {
 router.get("/", usuarioAutorizado, (req, res) => {
     console.log(req.usuario.id);
     let usuarioId = req.usuario.id;
-    // let usuarios = usuarioServicio.listarUsuarios();
-    // res.json(usuarios);
-
     //ahora devuelve informacion del usuario por id.
     //fetch de los datos del usuario para mostrar en el front
     let usuario = usuarioServicio.buscarUsuarioPorId(usuarioId);
