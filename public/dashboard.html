@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class=".container-fluid">
+        <nav class="nav nav-pills flex-column flex-sm-row justify-content-end navbar bg-primary">
+            <div class="col-2">
+                <a class=" row-6 flex-sm-fill text-sm-center nav-link active border border-white" href=" ">Mis Compras</a>
+            </div>
+            <div class="col-2">
+                <a class="flex-sm-fill text-sm-center nav-link active border border-white " href="/datos-usuario.html">Mis Datos</a>
+            </div>
+        </nav>
+    </div>
+    <div class="container my-5 pb-5 ml-5">
+        <h1 class="display-4  mb-5 ">Hey <span id="nombreUsuario">Nombre</span>,Bienvenido.</h1>
+    </div>
+    <blockquote class="blockquote text-center m-5 justify-content-center">
+        <p class="text-uppercase text-sm-center h3 mt-5 mb-3">Buscar Producto</p>
+        <input type="email" class="w-75 justify-content-center" id="exampleFormControlInput1" placeholder="Aca va la barra de busqueda">
+    </blockquote>
+    <div class="container">
+        <div class="d-flex flex-row justify-content-between align-items-baseline">
+            <p class="text-uppercase h5">Mis Productos</p>
+            <button type="button" id="crearProducto" class="btn btn-primary w-25 text-uppercase">Crear Producto + </button>
+        </div>
+        <h1 id="faltaProducto"> Aún no tiene ningun Producto Creado.</h1>
+        <!-- contenedor mis productos -->
+        <div id="contenedorCard" class="d-flex flex-row  align-items-baseline mt-5"></div>
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

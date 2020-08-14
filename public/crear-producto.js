@@ -1,6 +1,6 @@
 const formCrearProducto = document.getElementById("formCrearProducto");
 
-formCrearProducto.onsubmit = async (e) => {
+formCrearProducto.onsubmit = async(e) => {
     e.preventDefault();
     let producto = {
         nombreProducto: formCrearProducto.elements[
@@ -24,6 +24,7 @@ formCrearProducto.onsubmit = async (e) => {
         });
         let dataProducto = await pedidoProducto.json();
         console.log(dataProducto);
+        window.location.href = "/dashboard.html"
         return dataProducto;
     } catch (error) {
         console.log(error);

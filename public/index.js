@@ -24,7 +24,7 @@ btnRegistro.onclick = () => {
     seccionIniciarSesion.classList.replace("visible", "oculto");
 };
 
-formularioRegistro.onsubmit = async (e) => {
+formularioRegistro.onsubmit = async(e) => {
     e.preventDefault();
     let usuario = {
         nombre: formularioRegistro.elements["nombre"].value.toLowerCase(),
@@ -70,7 +70,7 @@ formularioRegistro.onsubmit = async (e) => {
     }
 };
 
-formularioInicioSesion.onsubmit = async (e) => {
+formularioInicioSesion.onsubmit = async(e) => {
     e.preventDefault();
     let usuario = {
         email: formularioInicioSesion.elements[
@@ -100,7 +100,7 @@ formularioInicioSesion.onsubmit = async (e) => {
                         </div>`;
             });
         } else {
-            window.location.href = "/inicio";
+            window.location.href = "/dashboard.html";
         }
     } catch (error) {
         console.log(error);
