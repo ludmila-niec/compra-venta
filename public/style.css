@@ -6,3 +6,15 @@
     justify-content: center;
     margin-top: 2em;
 }
+
+.visible {
+    display: block;
+}
+
+
+/* contenedor para sector de barra busqueda*/
+
+.contenedor-buscador-producto {
+    background-color: aliceblue;
+    height: 30vh;
+}
