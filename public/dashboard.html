@@ -3,40 +3,114 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Inicio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
     <div class=".container-fluid">
-        <nav class="nav nav-pills flex-column flex-sm-row justify-content-end navbar bg-primary">
-            <div class="col-2">
-                <a class=" row-6 flex-sm-fill text-sm-center nav-link active border border-white" href=" ">Mis Compras</a>
-            </div>
-            <div class="col-2">
-                <a class="flex-sm-fill text-sm-center nav-link active border border-white " href="/datos-usuario.html">Mis Datos</a>
+        <nav class="nav nav-pills flex-column flex-sm-row justify-content-between navbar bg-primary py-3">
+            <a href="/inicio"><h3 class="text-white">MercadoLib</h3></a>
+            <div class="d-flex">
+                <div class="mr-4">
+                    <button class=" btn btn-primary border border-white text-uppercase round-border px-3" id="crearProducto">Crear Publicacion +</button>
+                </div>
+                <div class="dropdown mr-2">
+                    <button class="btn btn-primary border border-white text-uppercase round-border px-3 dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="material-icons mr-2">
+                            person
+                        </span> Usuario
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" id="btn-mis-datos" href="#">Mis Datos</a>
+                        <a class="dropdown-item" id="btn-mis-productos" href="#seccion-mis-productos">Mis Productos</a>
+                        <a class="dropdown-item" id="btn-mis-compras" href="#">Mis Compras</a>
+                        <a class="dropdown-item" id="btn-cerrar-sesion" href="#">Cerrar Sesion</a>
+                    </div>
+                </div>
+                <!-- <div class="mr-4">
+                    <button class=" btn btn-primary border border-white text-uppercase round-border px-3">Mis Compras</button>
+                </div>
+                <div class="mr-4">
+                    <button class=" btn btn-primary border border-white text-uppercase round-border px-3">Mis Datos</button>
+                </div>
+                <div class="mr-3">
+                    <button class="btn btn-primary border border-white text-uppercase round-border px-3">Cerrar Sesion</button>
+                </div> -->
             </div>
         </nav>
     </div>
-    <div class="container my-5 pb-5 ml-5">
-        <h1 class="display-4  mb-5 ">Hey <span id="nombreUsuario">Nombre</span>,Bienvenido.</h1>
-    </div>
-    <blockquote class="blockquote text-center m-5 justify-content-center">
-        <p class="text-uppercase text-sm-center h3 mt-5 mb-3">Buscar Producto</p>
-        <input type="email" class="w-75 justify-content-center" id="exampleFormControlInput1" placeholder="Aca va la barra de busqueda">
-    </blockquote>
-    <div class="container">
-        <div class="d-flex flex-row justify-content-between align-items-baseline">
-            <p class="text-uppercase h5">Mis Productos</p>
-            <button type="button" id="crearProducto" class="btn btn-primary w-25 text-uppercase">Crear Producto + </button>
+    <header>
+        <div class="container pb-1 my-5 ml-5">
+            <h1 class="display-4 mb-5 ">Hey <span id="nombreUsuario">Nombre</span>, Bienvenide!</h1>
         </div>
-        <h1 id="faltaProducto"> Aún no tiene ningun Producto Creado.</h1>
-        <!-- contenedor mis productos -->
-        <div id="contenedorCard" class="d-flex flex-row  align-items-baseline mt-5"></div>
-    </div>
+    </header>
+    <main class="mx-3">
+        <section id="seccion-buscador-producto">
+            <form id="form-buscador-producto" method="get">
+                <div class="row mx-0 my-5 py-4 contenedor-buscador-producto">
+                    <div class="col-10 m-auto d-flex flex-column align-items-center justify-content-between">
+                        <h2 class="mb-4">Buscar Productos</h2>
+                        <input class="form-control form-control-lg col-8" type="text" id="input-busqueda-producto" placeholder="Ingresa tu búsqueda aquí..." />
+                        <button type="submit" id="btn-buscar-producto" class="btn btn-primary px-4 mt-4 round-border">
+                            Buscar
+                        </button>
+                    </div>
+            </form>
+            </div>
+            <div id="container-busqueda-resultado" class="oculto">
+                <div class="row py-3 d-flex justify-content-center">
+                    <div class="col-10">
+                        <div>
+                            <h4 id="busqueda-activa-placeholder">
+                                <strong>Resultados para:</strong>
+                            </h4>
+                        </div>
+                        <ul class="nav justify-content-end">
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" id="query-nuevo" href="#">Nuevo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="query-usado" href="#">Usado</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="query-todos" href="#">Todos</a>
+                            </li>
+                        </ul>
+                        <hr id="barra-separadora-resultados" />
+                        <div id="resultado-busqueda-dinamica"  class="row row-cols-1 row-cols-md-4"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="seccion-mis-productos" class="visible my-5 col-10 m-auto">
+                <div class="d-flex flex-row justify-content-between align-items-baseline mx-5">
+                    <p class="text-uppercase h5">Mis Productos</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div id="faltaProducto" class="my-5 py-4 d-flex flex-column justify-content-center visible">
+                        <h1 class="text-center text-muted my-4">Aún no tiene ningun Producto Publicado.</h1>
+                        <br>
+                        
+                    </div>
+                </div>
+                <div id="contenedorCard" class="row row-cols-1 row-cols-md-4"></div>
+            
+        </section>
+    </main>
+    <footer></footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="dashboard.js"></script>
+    <script src="./buscador.js"></script>
 </body>
 
 </html>

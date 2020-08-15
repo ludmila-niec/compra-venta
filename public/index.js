@@ -100,7 +100,7 @@ formularioInicioSesion.onsubmit = async(e) => {
                         </div>`;
             });
         } else {
-            window.location.href = "/dashboard.html";
+            window.location.href = "/inicio";
         }
     } catch (error) {
         console.log(error);

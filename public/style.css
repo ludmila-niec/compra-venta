@@ -1,9 +1,9 @@
 .oculto {
-    display: none;
+    display: none !important;
 }
 
 .visible {
-    display: block;
+    display: block !important;
 }
 
 #faltaProducto {
@@ -18,4 +18,15 @@
     height: 30vh;
 }
 
+/* color violeta*/
+.main-color {
+    background-color: #6610f2 !important;
+}
 
+.round-border {
+    border-radius: 1.078em !important;
+}
+
+.overflow-scroll{
+    overflow-x: scroll;
+}

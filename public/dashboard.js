@@ -1,60 +1,111 @@
-const nombreDelUsuario = document.getElementById("nombreUsuario")
-const contenedorCard = document.getElementById("contenedorCard")
-const faltaProducto = document.getElementById("faltaProducto")
-    // const btnCrearProducto
+const nombreDelUsuario = document.getElementById("nombreUsuario");
+const contenedorCard = document.getElementById("contenedorCard");
+const faltaProducto = document.getElementById("faltaProducto");
+
+const inputBuscar = document.getElementById("form-buscador-producto");
+const btnBuscarDash = document.getElementById("btn-buscar-producto");
+const seccionMisProductos = document.getElementById("seccion-mis-productos");
+
+
+//cuando se hace un busqueda la seccion de mis productos se oculta
+inputBuscar.addEventListener("submit", () => {
+    seccionMisProductos.classList.replace("visible", "oculto");
+});
+btnBuscarDash.addEventListener("click", () => {
+    seccionMisProductos.classList.replace("visible", "oculto");
+});
+
+//ACCESOS NAV
+// boton crear publicacion
 const btnCrearProducto = document.getElementById("crearProducto");
+btnCrearProducto.onclick = () => {
+    window.location.href = "/crear-producto.html";
+};
+
+// mis datos
+const btnMisDatos = document.getElementById("btn-mis-datos");
+btnMisDatos.onclick = () => {
+    window.location.href = "/datos-usuario.html";
+};
+
+//mis compras
+const btnMisCompras = document.getElementById("btn-mis-compras");
+//cerrar sesion
+const btnCerrarSesion = document.getElementById("btn-cerrar-sesion");
+
+
+//mis productos
+//mostrar mis productos y ocultar busquedas recientes
+const btnMisProductos = document.getElementById("btn-mis-productos");
+btnMisProductos.onclick = () => {
+    console.log("click boton mis productos");
+    seccionMisProductos.classList.replace("oculto", "visible");
+    //ocultar seccion de resultados de busqueda
+    const resultadoDash = document.getElementById(
+        "container-busqueda-resultado"
+    );
+    resultadoDash.classList.replace("visible", "oculto");
+};
+
 
 // funcion que trae los datos del usuario
-window.onload = function() {
+window.onload = function () {
     fetch("/usuarios", {
-            credentials: "include",
-        })
+        credentials: "include",
+    })
         .then((response) => response.json())
         .then((resultado) => {
             console.log(resultado);
-            // variable que contiene array mis productos
-            var productoUsuario = resultado.data.misProductos
             nombreUsuario(resultado);
-            card(productoUsuario)
+            let productoUsuario = resultado.data.misProductos;
+            card(productoUsuario);
         });
 };
 
 // funcion que muestra el nombre del usuario
 function nombreUsuario(datos) {
     let dataUsuario = datos.data;
-    let nombre = dataUsuario.nombre
-    let nombreMayuscula = nombre[0].toUpperCase() + nombre.slice(1)
-    nombreDelUsuario.innerText = nombreMayuscula
+    let nombre = dataUsuario.nombre;
+    let nombreMayuscula = nombre[0].toUpperCase() + nombre.slice(1);
+    nombreDelUsuario.innerText = nombreMayuscula;
+
+    //agrego el noombre del usuario al boton
+    dropdownMenuButton.innerHTML = `<span class="material-icons mr-2">
+                            person
+                        </span> ${dataUsuario.nombre}`;
 }
 
-// onclick que me lleva al html Crear Producto
-btnCrearProducto.onclick = () => {
-    window.open("/crear-producto.html");
-};
-
-// funcion que va completar los datos de la card
 function card(datosProdu) {
-    var datos = ""
+    var datos = "";
     if (datosProdu.length != 0) {
-        datosProdu.forEach(element => {
-            let nombreProducto = element.nombreProducto.toUpperCase()
-            let descripcion = element.descripcion
-            let estado = element.estado
-            let precio = element.precio
-            datos += ` <div class="card bg-light mb-3 mr-2 col-sm" style="max-width: 18rem;">
-           <div class="card-header">Mis Productos</div>
-           <div class="card-body">
-           <h5 class="card-title">${nombreProducto}</h5>
-           <h5 class="card-title">Estado:${estado}</h5>
-           <h5 class="card-title">Precio: ${precio}</h5>
-           <p class="card-text">${descripcion}</p>
-           </div>
-           </div>`
+        datosProdu.forEach((element) => {
+            let nombreProducto = element.nombreProducto.toUpperCase();
+            let descripcion = element.descripcion;
+            let estado = element.estado;
+            let precio = element.precio;
+            datos += `  <div class="card border-primary p-0 col-sm-8 col-md-4 col-lg-3 m-5">
+                        <h5 class="card-header bg-primary text-white text-truncate text-uppercase">
+                            ${nombreProducto}
+                        </h5>
+                        <a href="https://placeholder.com">
+                            <img src="https://via.placeholder.com/250" class="card-img-top" alt="img-producto" style="height: 250px;" />
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">$${precio}</h5>
+                            <p class="card-text">
+                                <small class="text-muted">Estado: ${estado}</small>
+                            </p>
+                            <div class="font-weight-light overflow-auto" style="max-height: 120px; max-width: 300px;">
+                                ${descripcion}
+                            </div>
+                        </div>
+                    </div> `;
         });
-        faltaProducto.style.display = "none"
+        faltaProducto.classList.replace("visible", "oculto");
+        // faltaProducto.style.display = "none"
         contenedorCard.innerHTML = datos;
     } else {
-        faltaProducto.style.display = "flex"
+        faltaProducto.classList.replace("oculto", "visible");
+        // faltaProducto.style.display = "flex"
     }
-
 }
