@@ -46,7 +46,8 @@ async function buscarProductoPorPalabra(e) {
 }
 
 //filtrar busqueda activa por estado 'Nuevo'
-filtroNuevo.onclick = async () => {
+filtroNuevo.onclick = async (e) => {
+    e.preventDefault();
     try {
         console.log("click en nuevo");
         let palabraClave = busquedaProductoInput.value.toLowerCase();
@@ -63,7 +64,8 @@ filtroNuevo.onclick = async () => {
 };
 
 //filtrar busqueda activa por estado 'Usado'
-filtroUsado.onclick = async () => {
+filtroUsado.onclick = async (e) => {
+    e.preventDefault();
     try {
         console.log("click en nuevo");
         let palabraClave = busquedaProductoInput.value.toLowerCase();
@@ -80,7 +82,8 @@ filtroUsado.onclick = async () => {
 };
 
 //volver mostrar los productos sin filtro de estado
-filtroTodos.onclick = async () => {
+filtroTodos.onclick = async (e) => {
+    e.preventDefault();
     try {
         let palabraClave = busquedaProductoInput.value.toLowerCase();
         let pedido = await fetch(`/productos?buscar=${palabraClave}`);
@@ -107,18 +110,19 @@ function mostrarResultadoBusqueda(respuesta) {
             const cardContainer = document.createElement("div");
             cardContainer.classList.add(
                 "card",
-                "border-primary",
+                "border-main-color",
+                "card-shadow",
                 "p-0",
                 "col-sm-8",
                 "col-md-4",
                 "col-lg-3",
                 "m-5"
             );
-            cardContainer.innerHTML = `<h5 class="card-header bg-primary text-white text-truncate text-uppercase">
+            cardContainer.innerHTML = `<h5 class="card-header bg-main-color text-white text-truncate text-uppercase">
                                             ${item.nombreProducto}
                                         </h5>
                                         <a href="https://placeholder.com">
-                                        <img src="https://via.placeholder.com/250" class="card-img-top" alt="img-producto" style="max-height: 250px;" />
+                                        <img src="https://via.placeholder.com/350" class="card-img-top" alt="img-producto" style="width:100%;" />
                                         </a>`;
             const cardBody = document.createElement("div");
             cardBody.classList.add("card-body");
@@ -126,13 +130,13 @@ function mostrarResultadoBusqueda(respuesta) {
                                            <p class="card-text">
                                                 <small class="text-muted">Estado: ${item.estado}</small>
                                             </p>
-                                            <div class="font-weight-light overflow-auto mb-2" style="max-height: 120px; max-width: 300px;">
+                                            <div class="font-weight-light overflow-auto mb-2" style="height: 120px; width: 300px;">
                                                  ${item.descripcion}
                                              </div>
                                             `;
             const btnComprar = document.createElement("button");
             // btnComprar.classList.add("btn", "btn-primary", "mt-2");
-            btnComprar.classList.add("btn", "btn-primary", "mt-2");
+            btnComprar.classList.add("btn", "btn-main-color", "mt-2");
             btnComprar.setAttribute("data-toggle", "modal");
             btnComprar.setAttribute("data-target", "#exampleModal");
             btnComprar.innerHTML = "Comprar";

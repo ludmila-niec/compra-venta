@@ -6,7 +6,6 @@ const inputBuscar = document.getElementById("form-buscador-producto");
 const btnBuscarDash = document.getElementById("btn-buscar-producto");
 const seccionMisProductos = document.getElementById("seccion-mis-productos");
 
-
 //cuando se hace un busqueda la seccion de mis productos se oculta
 inputBuscar.addEventListener("submit", () => {
     seccionMisProductos.classList.replace("visible", "oculto");
@@ -30,9 +29,17 @@ btnMisDatos.onclick = () => {
 
 //mis compras
 const btnMisCompras = document.getElementById("btn-mis-compras");
+btnMisCompras.onclick = () => {
+    window.location.href = "/mis-compras.html";
+};
 //cerrar sesion
 const btnCerrarSesion = document.getElementById("btn-cerrar-sesion");
 
+//btn crear mi primer producto
+const btnPrimerProducto = document.getElementById("crearPrimerProducto");
+btnPrimerProducto.onclick = () => {
+    window.location.href = "/crear-producto.html";
+};
 
 //mis productos
 //mostrar mis productos y ocultar busquedas recientes
@@ -46,7 +53,6 @@ btnMisProductos.onclick = () => {
     );
     resultadoDash.classList.replace("visible", "oculto");
 };
-
 
 // funcion que trae los datos del usuario
 window.onload = function () {
@@ -83,12 +89,12 @@ function card(datosProdu) {
             let descripcion = element.descripcion;
             let estado = element.estado;
             let precio = element.precio;
-            datos += `  <div class="card border-primary p-0 col-sm-8 col-md-4 col-lg-3 m-5">
-                        <h5 class="card-header bg-primary text-white text-truncate text-uppercase">
+            datos += `  <div class="card border-main-color card-shadow p-0 col-sm-8 col-md-4 col-lg-3 m-5">
+                        <h5 class="card-header bg-main-color text-white text-truncate text-uppercase">
                             ${nombreProducto}
                         </h5>
                         <a href="https://placeholder.com">
-                            <img src="https://via.placeholder.com/250" class="card-img-top" alt="img-producto" style="height: 250px;" />
+                            <img src="https://via.placeholder.com/350" class="card-img-top" alt="img-producto" style="width:100%" />
                         </a>
                         <div class="card-body">
                             <h5 class="card-title">$${precio}</h5>
@@ -101,11 +107,12 @@ function card(datosProdu) {
                         </div>
                     </div> `;
         });
-        faltaProducto.classList.replace("visible", "oculto");
+        faltaProducto.classList.replace("d-flex", "oculto");
         // faltaProducto.style.display = "none"
         contenedorCard.innerHTML = datos;
+        contenedorCard.classList.replace("oculto", "d-flex");
     } else {
-        faltaProducto.classList.replace("oculto", "visible");
+        faltaProducto.classList.replace("oculto", "d-flex");
         // faltaProducto.style.display = "flex"
     }
 }

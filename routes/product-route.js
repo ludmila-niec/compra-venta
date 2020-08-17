@@ -29,7 +29,7 @@ router.post("/", usuarioAutorizado, (req, res) => {
 });
 
 
-
+//realizar una compra
 router.post("/:idProducto", usuarioAutorizado, (req, res) => {
   try {
     let idUsuario = req.usuario.id;

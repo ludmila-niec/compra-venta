@@ -6,27 +6,75 @@
     display: block !important;
 }
 
+.display-flex {
+    display: flex;
+}
+
 #faltaProducto {
     justify-content: center;
     margin-top: 2em;
 }
 
-/* contenedor para sector de barra busqueda*/
-
-.contenedor-buscador-producto {
-    background-color: aliceblue;
-    height: 30vh;
-}
-
-/* color violeta*/
+/* personalizacion del color primario*/
 .main-color {
     background-color: #6610f2 !important;
 }
+.btn-main-color {
+    background-color: #6610f2 !important;
+    border-color: #ffffff !important;
+    color: #fff !important;
+}
+.btn-main-color:hover {
+    background-color: #5218ad !important;
+}
+
+.btn-outline-main-color {
+    background-color: transparent !important;
+    border-color: #6610f2 !important;
+    color: #6610f2 !important;
+}
+
+.btn-outline-main-color:hover {
+    /* background-color: #6610f2 !important; */
+    background-color: #5218ad !important;
+    color: #fff !important;
+    border-color: #ffffff !important;
+}
+
+.bg-main-color {
+    background-color: #6610f2 !important;
+}
+
+.border-main-color {
+    border-color: #6610f2 !important;
+}
+
+/* personalizacion del color primario*/
 
 .round-border {
     border-radius: 1.078em !important;
 }
 
-.overflow-scroll{
+.overflow-scroll {
     overflow-x: scroll;
 }
+
+#background {
+    background-image: url("./img/retro-furnish.jpg");
+}
+
+#bg-compras{
+    background-image: url("./img/retro-furnish.jpg");
+    min-height: 90vh;
+}
+
+.input-shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    border-radius: 0.25rem !important;
+}
+
+.card-shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+

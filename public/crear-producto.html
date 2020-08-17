@@ -10,7 +10,11 @@
 </head>
 
 <body>
-    <div class="contenedorTodo">
+    <nav class="nav nav-pills flex-column flex-sm-row justify-content-between navbar bg-main-color py-3">
+        <a href="/inicio">
+            <h3 class="text-white">MercadoLib</h3>
+        </a>
+    </nav>
 
         <section id="creaTuProducto">
 
@@ -24,7 +28,7 @@
         <section id="registroProducto">
             <div class="row my-5 mx-0">
                 <div class="col-md-5 m-auto">
-                    <div class="card card-body border-primary">
+                    <div class="card card-body border-main-color">
                         <h1 class="mb-5">Crear Producto</h1>
                         <form id="formCrearProducto">
                             <div class="contenedorProducto">
@@ -45,9 +49,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Descripción del Producto</label>
-                                    <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" placeholder="Descripcion de tu Producto" rows="3" required></textarea>
+                                    <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" placeholder="Descripcion de tu Producto" rows="3" maxlength="140" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-5 p-2 btn-block">Crear Producto</button>
+                                <button type="submit" class="btn btn-main-color mt-5 p-2 btn-block">Crear Producto</button>
+                                <a class="btn btn-dark  mt-3 p-2 btn-block" href="/inicio" role="button">Cancelar</a>
                         </form>
                         </div>
                     </div>

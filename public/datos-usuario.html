@@ -11,6 +11,11 @@
 </head>
 
 <body>
+    <nav class="nav nav-pills flex-column flex-sm-row justify-content-between navbar bg-main-color py-3">
+        <a href="/inicio">
+            <h3 class="text-white">MercadoLib</h3>
+        </a>
+    </nav>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4">Bienvenido a nuestra Pagina</h1>
@@ -18,25 +23,25 @@
         </div>
     </div>
     <div class="row my-6">
-        <div class="col-md-7 m-auto">
-            <div class="card card-body border-primary">
+        <div class="col-md-6 m-auto">
+            <div class="card card-body border-main-color card-shadow m-5">
                 <h1 class="mb-5">Datos Registrados del Usuario</h1>
                 <form id="datosUsuario">
                     <div class="contenedorDatos">
                         <div class="form-group row" id="nombreDato">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre Registrado</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
                                 <input type="email" class="form-control" disabled id="nombreRegistrado">
                             </div>
                         </div>
                         <div class="form-group row" id="apellidoDato">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Apellido Registrado</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Apellido</label>
                             <div class="col-sm-10">
                                 <input type="email" class="form-control" disabled id="apellidoRegistrado">
                             </div>
                         </div>
                         <div class="form-group row" id="emailDato">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email registrado</label>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
                                 <input type="email" class="form-control" disabled id="emailRegistrado">
                             </div>
@@ -45,8 +50,8 @@
                     <h5 class="mb-2"> Listo, ahora podes crear un producto para vender o comprar un producto a otro usuario.</h5>
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary mt-5 p-2 btn-block" id="btnCrearProducto">Crear Producto</button>
-                            <button type="button" class="btn btn-primary mt-3 p-2 btn-block">Comprar Producto</button>
+                            <button type="button" class="btn btn-main-color mt-5 p-2 btn-block" id="btnCrearProducto">Editar datos</button>
+                            <a class="btn btn-dark  mt-3 p-2 btn-block" href="/inicio" role="button">Volver</a>
                         </div>
                     </div>
                 </form>

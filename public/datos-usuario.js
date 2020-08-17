@@ -2,8 +2,7 @@
 const nombreRegistrado = document.getElementById("nombreRegistrado");
 const apellidoRegistrado = document.getElementById("apellidoRegistrado");
 const emailRegistrado = document.getElementById("emailRegistrado");
-// boton de crear Producto
-const btnCrearProducto = document.getElementById("btnCrearProducto");
+
 
 // funcion que hace el get para traer la data del usuario ni bien carga la pagina de datos-usuario
 window.onload = function () {
@@ -27,7 +26,3 @@ function muestraDatos(datos) {
         emailRegistrado.value = email;
     ;
 }
-// onclick que me lleva al html Crear Producto
-btnCrearProducto.onclick = () => {
-    window.open("/crear-producto.html");
-};
