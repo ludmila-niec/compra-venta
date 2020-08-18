@@ -3,28 +3,32 @@ const router = express.Router();
 const productoServicio = require("../services/productos-service");
 const { usuarioAutorizado } = require("../middleware/auth");
 const { usuarios, realizarUnaCompra } = require("../db/database");
+const { validarCamposInicioSesion } = require("../services/usuario-service");
 
 //Crear productos
 router.post("/", usuarioAutorizado, (req, res) => {
     try {
         let nuevoProducto = req.body;
         let idUsuario = req.usuario.id;
-        const { nombreProducto, precio, estado, descripcion } = nuevoProducto;
-        // falta validacion inputs completos
-        if (!(nuevoProducto && idUsuario)) {
-            return res.status(400).json({
-                Error: "Faltan datos para crear el producto",
-            });
+        let validacion = productoServicio.validarCamposProductoNuevo(
+            nuevoProducto,
+            idUsuario
+        );
+        if (validacion.length > 0) {
+            return res.status(400).json({ exito: false, data: validacion });
+        }
+
+        let resultado = productoServicio.crearProducto(
+            nuevoProducto,
+            idUsuario
+        );
+        if (resultado) {
+            res.status(201).json({ exito: true, data: resultado });
         } else {
-            let resultado = productoServicio.crearProducto(
-                nuevoProducto,
-                idUsuario
-            );
-            if (resultado) {
-                res.status(201).json({ exito: true, data: resultado });
-            } else {
-                res.status(400).json({ Error: "No se pudo crear el producto" });
-            }
+            res.status(400).json({
+                exito: false,
+                data: "No se pudo crear el producto",
+            });
         }
     } catch (err) {
         res.status(400).json({ Error: err.message });

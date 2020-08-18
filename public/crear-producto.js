@@ -1,4 +1,5 @@
 const formCrearProducto = document.getElementById("formCrearProducto");
+const contenedorErrores = document.getElementById("producto-error");
 
 formCrearProducto.onsubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +25,7 @@ formCrearProducto.onsubmit = async (e) => {
         let dataProducto = await pedidoProducto.json();
         console.log(dataProducto);
         if (dataProducto.exito) {
-          await Swal.fire({
+            await Swal.fire({
                 title: "Publicación creada!",
                 showClass: {
                     popup: "animate__animated animate__fadeInDown",
@@ -33,9 +34,19 @@ formCrearProducto.onsubmit = async (e) => {
                     popup: "animate__animated animate__fadeOutUp",
                 },
             });
+            window.location.href = "/dashboard.html#seccion-mis-productos";
+        } else {
+            let errores = dataProducto.data;
+            errores.forEach((error) => {
+                contenedorErrores.innerHTML += `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        ${error.mensaje}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                         </button>
+                        </div>`;
+            });
         }
-        window.location.href = "/dashboard.html#seccion-mis-productos";
-        return dataProducto;
+        // return dataProducto;
     } catch (error) {
         console.log(error);
     }

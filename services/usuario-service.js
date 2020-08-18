@@ -17,6 +17,16 @@ module.exports.validarCamposNuevoUsuario = function (data) {
         });
     }
 
+    //check nombre solo letras
+    if (!isNaN(nombre)) {
+        errores.push({ mensaje: "Nombre solo acepta letras" });
+    }
+
+    //check apellido solo letras
+    if (!isNaN(apellido)) {
+        errores.push({ mensaje: "Apellido solo acepta letras" });
+    }
+
     //validar un email real
     if (!email.includes(".com")) {
         errores.push({

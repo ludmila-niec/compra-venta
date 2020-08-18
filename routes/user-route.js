@@ -12,16 +12,14 @@ router.post("/", async (req, res) => {
         let usuario = req.body;
         let validacion = usuarioServicio.validarCamposNuevoUsuario(usuario);
         if (validacion.length > 0) {
-            res.status(400).json({ exito: false, data: validacion });
-            return;
+            return res.status(400).json({ exito: false, data: validacion }); 
         }
         //encriptar password
         const hashedPassword = await usuarioServicio.hashPassword(usuario);
         usuario.password = hashedPassword;
         let usuarioNuevo = usuarioServicio.crearUsuario(usuario);
         //checkear resultado e informar en front
-        res.status(201).json({ exito: true, data: usuarioNuevo });
-        return;
+       return res.status(201).json({ exito: true, data: usuarioNuevo });    
     } catch (error) {
         res.status(500).json({ Error: error.message });
     }
