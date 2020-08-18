@@ -107,42 +107,42 @@ function mostrarResultadoBusqueda(respuesta) {
         }
         let productos = respuesta.data;
         productos.forEach((item) => {
+            const cardColumn = document.createElement('div')
+            cardColumn.classList.add("col-10","m-auto")
             const cardContainer = document.createElement("div");
             cardContainer.classList.add(
                 "card",
                 "border-main-color",
                 "card-shadow",
-                "p-0",
-                "col-sm-8",
-                "col-md-4",
-                "col-lg-3",
-                "m-5"
+                "m-4"
             );
             cardContainer.innerHTML = `<h5 class="card-header bg-main-color text-white text-truncate text-uppercase">
                                             ${item.nombreProducto}
                                         </h5>
-                                        <a href="https://placeholder.com">
-                                        <img src="https://via.placeholder.com/350" class="card-img-top" alt="img-producto" style="width:100%;" />
-                                        </a>`;
+                                        `;
             const cardBody = document.createElement("div");
-            cardBody.classList.add("card-body");
-            cardBody.innerHTML = ` <h3 class="card-title">$${item.precio}</h3>                      
+            cardBody.classList.add("card-body","d-flex","align-items-center");
+            cardBody.innerHTML = `<a href="https://placeholder.com" class="mr-3">
+                                        <img src="https://via.placeholder.com/350" class="card-img-top" alt="img-producto"/>
+                                        </a>`                                   
+            const productInfo = document.createElement('div')
+            productInfo.classList.add("m-4")
+            productInfo.innerHTML = ` <h3 class="card-title">$${item.precio}</h3>                      
                                            <p class="card-text">
                                                 <small class="text-muted">Estado: ${item.estado}</small>
                                             </p>
-                                            <div class="font-weight-light overflow-auto mb-2" style="height: 120px; width: 300px;">
-                                                 ${item.descripcion}
-                                             </div>
-                                            `;
+                                            <p class="font-weight-light text-muted">${item.descripcion}</p>`;
             const btnComprar = document.createElement("button");
             // btnComprar.classList.add("btn", "btn-primary", "mt-2");
             btnComprar.classList.add("btn", "btn-main-color", "mt-2");
             btnComprar.setAttribute("data-toggle", "modal");
             btnComprar.setAttribute("data-target", "#exampleModal");
             btnComprar.innerHTML = "Comprar";
-            cardBody.appendChild(btnComprar);
+            productInfo.appendChild(btnComprar);
+            cardBody.appendChild(productInfo)
             cardContainer.appendChild(cardBody);
-            contenedorResultadoProductos.appendChild(cardContainer);
+            cardColumn.appendChild(cardContainer)
+            contenedorResultadoProductos.appendChild(cardColumn);
 
             btnComprar.onclick = async () => {
                 let idProducto = item.id;

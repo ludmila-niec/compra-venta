@@ -14,39 +14,38 @@
     justify-content: center;
     margin-top: 2em;
 }
-
+/* #6610f2 old color */
 /* personalizacion del color primario*/
 .main-color {
-    background-color: #6610f2 !important;
+    background-color: #814beb !important;
 }
 .btn-main-color {
-    background-color: #6610f2 !important;
+    background-color: #814beb !important;
     border-color: #ffffff !important;
     color: #fff !important;
 }
 .btn-main-color:hover {
-    background-color: #5218ad !important;
+    background-color: #7032eb !important;
 }
 
 .btn-outline-main-color {
     background-color: transparent !important;
-    border-color: #6610f2 !important;
-    color: #6610f2 !important;
+    border-color: #814beb !important;
+    color: #814beb !important;
 }
 
 .btn-outline-main-color:hover {
-    /* background-color: #6610f2 !important; */
-    background-color: #5218ad !important;
+    background-color: #7032eb !important;
     color: #fff !important;
     border-color: #ffffff !important;
 }
 
 .bg-main-color {
-    background-color: #6610f2 !important;
+    background-color: #814beb !important;
 }
 
 .border-main-color {
-    border-color: #6610f2 !important;
+    border-color: #814beb !important;
 }
 
 /* personalizacion del color primario*/
@@ -55,9 +54,6 @@
     border-radius: 1.078em !important;
 }
 
-.overflow-scroll {
-    overflow-x: scroll;
-}
 
 #background {
     background-image: url("./img/retro-furnish.jpg");

@@ -27,7 +27,7 @@ function mostrarCompras(misCompras) {
             let precio = element.precio;
             datos += `<div class="col-10 m-auto">
                 <div class="card border-main-color card-shadow m-4">
-                    <div class="card-header bg-main-color text-white text-truncate text-uppercase">${nombreProducto}</div>
+                    <h5 class="card-header bg-main-color text-white text-truncate text-uppercase">${nombreProducto}</h5>
                     <div class="card-body text-primary d-flex align-items-center">
                         <a href="https://placeholder.com" class="mr-3">
                             <img src="https://via.placeholder.com/350" class="card-img-top" alt="img-producto" />
