@@ -18,12 +18,12 @@ module.exports.validarCamposNuevoUsuario = function (data) {
     }
 
     //check nombre solo letras
-    if (!isNaN(nombre)) {
+    if (!/^[a-z]+$/i.test(nombre)) {
         errores.push({ mensaje: "Nombre solo acepta letras" });
     }
 
     //check apellido solo letras
-    if (!isNaN(apellido)) {
+    if (!/^[a-z]+$/i.test(apellido)) {
         errores.push({ mensaje: "Apellido solo acepta letras" });
     }
 
