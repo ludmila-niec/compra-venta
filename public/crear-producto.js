@@ -1,6 +1,6 @@
 const formCrearProducto = document.getElementById("formCrearProducto");
 
-formCrearProducto.onsubmit = async(e) => {
+formCrearProducto.onsubmit = async (e) => {
     e.preventDefault();
     let producto = {
         nombreProducto: formCrearProducto.elements[
@@ -19,12 +19,22 @@ formCrearProducto.onsubmit = async(e) => {
             body: JSON.stringify(producto),
             headers: {
                 "Content-Type": "application/json",
-                // id:
             },
         });
         let dataProducto = await pedidoProducto.json();
         console.log(dataProducto);
-        window.location.href = "/dashboard.html"
+        if (dataProducto.exito) {
+            Swal.fire({
+                title: "Publicación creada!",
+                showClass: {
+                    popup: "animate__animated animate__fadeInDown",
+                },
+                hideClass: {
+                    popup: "animate__animated animate__fadeOutUp",
+                },
+            });
+        }
+        window.location.href = "/dashboard.html#seccion-mis-productos";
         return dataProducto;
     } catch (error) {
         console.log(error);

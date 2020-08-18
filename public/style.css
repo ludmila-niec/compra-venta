@@ -56,11 +56,11 @@
 
 
 #background {
-    background-image: url("./img/retro-furnish.jpg");
+    background-image: url("./img/background.png");
 }
 
 #bg-compras{
-    background-image: url("./img/retro-furnish.jpg");
+    background-image: url("./img/background.png");
     min-height: 90vh;
 }
 
