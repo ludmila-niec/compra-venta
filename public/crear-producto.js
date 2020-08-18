@@ -24,7 +24,7 @@ formCrearProducto.onsubmit = async (e) => {
         let dataProducto = await pedidoProducto.json();
         console.log(dataProducto);
         if (dataProducto.exito) {
-            Swal.fire({
+          await Swal.fire({
                 title: "Publicación creada!",
                 showClass: {
                     popup: "animate__animated animate__fadeInDown",
