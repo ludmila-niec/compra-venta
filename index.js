@@ -4,6 +4,8 @@ const userRoute = require("./routes/user-route");
 const productRoute = require("./routes/product-route");
 const cookieParser = require("cookie-parser");
 const { usuarioAutorizado } = require("./middleware/auth");
+const sql = require('./connection');
+
 
 app.use(express.json());
 app.use(express.static("public"));
