@@ -4,13 +4,25 @@ const usuarioServicio = require("../services/usuario-service");
 const router = express.Router();
 const SECRET_JWT = "skfnsiLSAOAsd5aslsk87sn";
 const { usuarioAutorizado } = require("../middleware/auth");
-//despues guardamos los 'secretos' en variables de entorno
+const repousuarios = require("../repo/usuarios-repo")
+const sql = require("../conexion/conexion")
+    //despues guardamos los 'secretos' en variables de entorno
 
+
+router.get('/', async(req, res) => {
+    try {
+        let listadoUsuarios = await repousuarios.getUsuarios();
+        res.status(200).send(listadoUsuarios)
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ err: error.message });
+    }
+});
 //registra usuario nuevo
-router.post("/", async (req, res) => {
+router.post("/", async(req, res) => {
     try {
         let usuario = req.body;
-        let validacion = usuarioServicio.validarCamposNuevoUsuario(usuario);
+        let validacion = await usuarioServicio.validarCamposNuevoUsuario(usuario);
         if (validacion.length > 0) {
             res.status(400).json({ exito: false, data: validacion });
             return;
@@ -18,7 +30,7 @@ router.post("/", async (req, res) => {
         //encriptar password
         const hashedPassword = await usuarioServicio.hashPassword(usuario);
         usuario.password = hashedPassword;
-        let usuarioNuevo = usuarioServicio.crearUsuario(usuario);
+        let usuarioNuevo = await repousuarios.registrarUsuario(usuario);
         //checkear resultado e informar en front
         res.status(201).json({ exito: true, data: usuarioNuevo });
         return;
@@ -28,7 +40,7 @@ router.post("/", async (req, res) => {
 });
 
 //Handler del inicio de sesion
-router.post("/iniciarsesion", async (req, res) => {
+router.post("/iniciarsesion", async(req, res) => {
     let usuario = req.body;
     try {
         //checkeo email y contraseña valida
@@ -44,8 +56,7 @@ router.post("/iniciarsesion", async (req, res) => {
             req.body.email
         );
         //generar Token
-        let token = jwt.sign(
-            {
+        let token = jwt.sign({
                 id: usuarioDataStore.id,
                 nombre: usuarioDataStore.nombre,
             },

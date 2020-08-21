@@ -15,6 +15,9 @@ app.use(cookieParser());
 app.use("/usuarios", userRoute);
 app.use("/productos", productRoute);
 
+// conexion
+
+
 //ruta al inicio una vez iniciada la sesion
 app.get("/inicio", usuarioAutorizado, (req, res) => {
     res.sendFile("./public/dashboard.html", { root: __dirname });
