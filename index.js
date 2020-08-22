@@ -5,6 +5,7 @@ const productRoute = require("./routes/product-route");
 const cookieParser = require("cookie-parser");
 const { usuarioAutorizado } = require("./middleware/auth");
 const sql = require('./connection');
+const dotenv = require('dotenv').config()
 
 
 app.use(express.json());
