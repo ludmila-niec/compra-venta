@@ -10,7 +10,7 @@ module.exports.usuarioAutorizado = function (req, res, next) {
                 .status(401)
                 .send("Tenes que iniciar sesion para acceder a este contenido");
         }
-        const verificarToken = jwt.verify(token, "skfnsiLSAOAsd5aslsk87sn");
+        const verificarToken = jwt.verify(token, process.env.SECRET_JWT);
         if (verificarToken) {
             req.usuario = verificarToken;
             return next();

@@ -4,6 +4,8 @@ const userRoute = require("./routes/user-route");
 const productRoute = require("./routes/product-route");
 const cookieParser = require("cookie-parser");
 const { usuarioAutorizado } = require("./middleware/auth");
+const dotenv = require("dotenv");
+dotenv.config();
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -22,19 +24,8 @@ app.get("/inicio", usuarioAutorizado, (req, res) => {
     console.log(req.usuario.id);
 });
 
-// app.get('/inicio/misdatos', usuarioAutorizado, (req, res) =>{
-//     res.sendFile("./public/datos-usuario.html", { root: __dirname });
-// })
-// app.get('/inicio/misproductos', usuarioAutorizado, (req, res) =>{
-//     res.sendFile("./public/mis-productos.html", { root: __dirname });
-// })
-// app.get('/inicio/miscompras', usuarioAutorizado, (req, res) =>{
-//     res.sendFile("./public/mis-compras.html", { root: __dirname });
-// })
-// app.get('/inicio/crearproducto', usuarioAutorizado, (req, res) =>{
-//     res.sendFile("./public/crear-producto.html", { root: __dirname });
-// })
+const PORT = process.env.PORT;
 
-app.listen(3002, () => {
-    console.log("server init 3002");
+app.listen(PORT || 3000, () => {
+    console.log(`server init port ${PORT}`);
 });
