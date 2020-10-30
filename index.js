@@ -24,13 +24,12 @@ app.get("/", (req, res) => {
 
 //ruta al inicio una vez iniciada la sesion
 app.get("/inicio", usuarioAutorizado, (req, res) => {
-    res.sendFile("./public/dashboard.html", { root: __dirname });
+    // res.sendFile("./public/dashboard.html", { root: __dirname });
+    res.sendFile(path.resolve(__dirname, "public", "dashboard.html"));
     console.log("inicio sesion");
     console.log(req.usuario.id);
 });
 
-const PORT = process.env.PORT;
-
-app.listen(PORT || 3000, () => {
-    console.log(`server init port ${PORT}`);
+app.listen(process.env.PORT || 3000, () => {
+    console.log("server init");
 });
