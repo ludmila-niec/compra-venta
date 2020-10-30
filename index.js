@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 const userRoute = require("./routes/user-route");
 const productRoute = require("./routes/product-route");
 const cookieParser = require("cookie-parser");
@@ -16,6 +17,10 @@ app.use(cookieParser());
 //routes
 app.use("/usuarios", userRoute);
 app.use("/productos", productRoute);
+
+app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"));
+});
 
 //ruta al inicio una vez iniciada la sesion
 app.get("/inicio", usuarioAutorizado, (req, res) => {
