@@ -2,6 +2,8 @@
 Este proyecto fue desarrollado durante la cursada de la carrera de Desarrollo Web Full Stack en Acamica, a modo de workshop integrador trabajando en equipo.
 El objetivo era integrar los conocimientos en HTML, CSS, Javascript y Backend con NodeJs.
 
+:arrow_forward: [Live Demo](https://acamica-shop.herokuapp.com/)
+
 ### Caracteristicas:
 * Registro de Usuarios
 * Inicio de sesión en la plataforma con email y contraseña
